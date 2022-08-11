@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .blog{
+            margin-left: 29%;
+        }
+    </style>
+</head>
+<body>
+    
+
+{% extends 'portfolio/base.html' %}
+    {% block content %}
+<div class="blog">
+    <h1>Hi there! Welcome to my blog:)</h1>
+    <h2>Ambrose has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h2>
+    <!-- create a for loop to iterate through the data -->
+    {% for blog in blogs %}
+    <br>
+    <img src="{{ blog.image.url }}" height=800 width= 800 >
+    <br>
+    <h2><a href="{% url 'blog:detail' blog.id %}" class="btn btn-success">{{ blog.title }}</a></h2>
+    <br>
+    <br>
+    {{ blog.description|striptags|truncatechars:'80' }}
+
+    <br>
+    <h4>{{blog.date|date:'M d Y'}}</h4>
+    <br>
+    {% if blog.url %}
+    <a href="{{ project.url }}" class="btn btn-info"> Link </a>
+
+    {% endif %}
+
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>

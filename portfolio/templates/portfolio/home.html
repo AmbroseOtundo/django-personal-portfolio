@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .details{
+            margin-left: 25%;
+        }
+        .description{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    
+
+{% extends 'portfolio/base.html' %}
+{% block content %}
+<div class="details">
+    <h1>Ambrose's portfolio</h1>
+ 
+    <!-- adding static -->
+    {% load static %}
+    <!-- load the blog link in the homepage -->
+    <div class="description">
+    <a href="{% url 'blog:all_blogs' %}" class="btn btn-primary"> Blog </a>
+    <br>
+    <br>
+    
+    <a href="{% static 'portfolio/Ambrose_Otundo_Onsare_CV.pdf' %}" class="btn btn-secondary">Resume</a>
+    <br>
+    </div>
+    <img src="{% static 'portfolio/dog.png' %}" height="800" width="800">
+    <br>
+    <br>
+    
+    
+    <!-- create a for loop to iterate through the data -->
+    {% for project in projects %}
+    {% comment %} this displays the data {% endcomment %}
+    {{ project.title }}
+    <br>
+    <br>
+    {{ project.description }}
+    <br>
+    <br>
+    <img src="{{ project.image.url }}" height=800 width= 800>
+    <br>
+    {% if project.url %}
+    <a href="{{ project.url }}" class="btn btn-primary"> Source</a>
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
+</div>
+</body>
+</html>
+
